@@ -1,0 +1,14 @@
+name: CI                      # 為什麼:在 GitHub 的 Actions 頁面上顯示的名字
+
+on: [push, pull_request]      # 為什麼:觸發條件——有人 push 或開 PR 就自動跑
+
+jobs:
+  test:                       # 為什麼:一個 job = 一組在同一台機器上做的事
+    runs-on: ubuntu-latest    # 為什麼:GitHub 免費借你一台全新的 Linux 虛擬機來跑
+    steps:
+      - uses: actions/checkout@v4        # 為什麼:把你的程式碼下載到那台空機器
+      - uses: actions/setup-python@v5    # 為什麼:那台機器要先有 Python
+        with:
+          python-version: "3.12"
+      - run: pip install pytest          # 為什麼:安裝測試工具
+      - run: pytest                      # 為什麼:真正執行測試;失敗就會亮紅燈
